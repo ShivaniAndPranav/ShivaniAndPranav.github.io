@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shivani and Pranav</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+        let member_names = JSON.parse(sessionStorage.getItem("member_names"));
+        console.log(member_names);
+        let invited_events = JSON.parse(sessionStorage.getItem("invited_events"));
+        // invited_events = [1, 2, 3, 4]
+        console.log(invited_events);
+        if (member_names == null || invited_events.length == 0) {
+            window.location.href = "pages/login.html";
+        }
+        let group_id = JSON.parse(sessionStorage.getItem("group_id"));
+        let rsvp_dict = JSON.parse(sessionStorage.getItem("rsvp_dict"));
+        let travel_info_dict = JSON.parse(sessionStorage.getItem("travel_info_dict"));
+
+        if (!travel_info_dict) {
+            travel_info_dict = {}
+        }
+
+        // if (travel_info_dict.length > 0) {
+        //     $("#travelInfoDiv").css("display", "block");
+        // }
+    </script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    <a class="btn menu-button" onclick="toggleMenu()">
+        <div style="width: 30%; float: left">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div style="width: 50%; float: right; margin-right: 10px;">MENU</div>
+    </a>
+
+    <div class="menu-sidebar" id="menu-sidebar">
+        <div class="menu-header font-secondary">Shivani & Pranav</div>
+        <div class="menu-close" onclick="toggleMenu()">X</div>
+        <div class="menu-links">
+            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#home">Home</a></div>
+            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#story">Our story</a></div>
+            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#events">Events</a></div>
+            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#rsvp">RSVP</a></div>
+            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#gifts">Gifts</a></div>
+            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#gallery">Photo gallery</a></div>
+        </div>
+        <div class="menu-footer">
+            <div class="menu-footer-item font-custom-1" style="font-size: 18px">Logged in as <span id="login_user_name"></span></div>
+            <div class="menu-footer-item font-custom-1 logout-button" onclick="sessionStorage.clear(); window.location.href='pages/login.html';"><i id="lock" class="fa fa-lock"></i>  Logout</div>
+        </div>
+    </div>
+    <div id="overlay"></div>
+    <div id="contentWrapper">
+        <div class="top">
+            <div class="main-left top-main-left"> 
+                <div class="container-fluid p-0" id="left-first">
+                    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="height: 100vh; min-height: 400px;">
+                                <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="object-fit: cover;">
+                                <div class="carousel-caption d-flex flex-column align-items-left justify-content-left">
+                                    <div class="p-3" style="position: absolute; left: 35px;bottom: 35px;">
+                                        <h1 class="display-4 font-secondary text-left text-white">Shivani & Pranav</h1>
+                                        <h3 class="text-left font-custom-2 font-weight-normal text-white m-0" style="letter-spacing: 2px;">We can't wait to share our special day with you!</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-right top-main-right" id="home">
+                <!-- <div style="height: 100vh;  min-height: 400px; min-width: 50vw; position: relative">
+                    <img src="img/Cover-wedding-final-textured.png" style="position:absolute; top: -9999px; right: -9999px; left: -9999px; bottom: -9999px; margin: auto;" height="100%">
+                </div> -->
+                <div class="container-fluid p-0" id="left-first">
+                    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="height: 100vh; min-height: 400px; background-image: url('img/Texture.png'); background-size: contain; background-color: rgba(0, 0, 0, 0.4); background-blend-mode: normal;">
+                                <img class="position-absolute w-100 h-100" src="img/Cover.png" style="object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="container-fluid" id="home" style="height: 100vh;  min-height: 400px; background-color: rgba(178, 104, 81, 1);">
+                    <div class="container pt-5 pb-3">
+                        <div class="main-right-decor-top-left" style="position: absolute; width: 300px;">
+                            <img width="100%" src="https://withjoy.dexecure.net/assets/public/styles/prod/rustic_chic_3/24a83fd0957ec32c72122f8a52dfd2a67e15e5fc9c208d87af1c35f78a536b06@2x"/>
+                        </div>
+                        <div class="main-right-decor-bottom-right" style="position: absolute; width: 250px;">
+                            <img width="100%" src="https://withjoy.dexecure.net/assets/public/styles/prod/rustic_chic_3/d66e8bcc1dbd8b0e4ece8f899cc52fc182baba91279454865beca5f3caa49d0d@2x"/>
+                        </div>
+        
+                        <div class="position-relative text-center">
+                            <h1 class="font-secondary display-4">Display of events summary</h1>
+                        </div>
+                        
+                        <div class="container text-center">
+                            <div class="row" style="background-color: bisque; margin-top: 30px; height: 80px;">
+                                Haldi
+                            </div>
+                            <div class="row" style="background-color: bisque; margin-top: 30px; height: 80px;">
+                                Sangeet
+                            </div>
+                            <div class="row" style="background-color: bisque; margin-top: 30px; height: 80px;">
+                                Shaadi
+                            </div>
+                        </div>
+        
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="main-left" id="main-left"> 
+            <!-- This will only contain photos -->
+            <!-- <div id="left-imgs-6" style="opacity: 0; position:fixed; top: 0px; width: inherit"><img src="img/carousel-7.jpg" width="100%"></div> -->
+            <div id="left-imgs-5" style="opacity: 0; position:fixed; top: 0px; width: inherit"><img src="img/carousel-6.jpg" height="100%" width="100%"></div>
+            <div id="left-imgs-4" style="opacity: 0; position:fixed; top: 0px; width: inherit"><img src="img/carousel-5.jpg" height="100%" width="100%"></div>
+            <div id="left-imgs-3" style="opacity: 0; position:fixed; top: 0px; width: inherit"><img src="img/carousel-4.jpg" height="100%" width="100%"></div>
+            <div id="left-imgs-2" style="opacity: 0; position:fixed; top: 0px; width: inherit"><img src="img/carousel-3.jpg" height="100%" width="100%"></div>
+            <div id="left-imgs-1" style="opacity: 1; position:fixed; top: 0px; width: inherit"><img src="img/carousel-2.jpg" height="100%" width="100%"></div>
+            
+        </div>
+        <div class="main-right">
+            
+            <!-- Story Start -->
+            <div class="container-fluid" id="story">
+                <div class="container py-5">
+                    <div class="position-relative text-center">
+                        <h1 class="font-secondary display-4">Our Story</h1>
+                    </div>
+                    <!-- <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <h5 class="font-weight-normal text-muted mb-3 pb-3">Clita ipsum aliquyam dolor diam dolores elitr nonumy. Rebum sea vero ipsum eirmod tempor kasd. Diam amet lorem erat eos sit lorem elitr justo</h5>
+                        </div>
+                    </div> -->
+                    <div class="row story-row">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center text-md-left ml-md-3">
+                                <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">How we met?</h4>
+                                    <p class="mb-0">In September 2020, we both arrived at the University of Illinois at Urbana Champaign for our Masters.</p>
+                                    
+                                    <p class="mb-2">We were among the very few to be able to make it to the US in person during COVID. We connected online before we reached and were the first people we met here, in front of a supermarket on campus, County Market.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
+                                <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row story-row">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
+                                <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center text-md-left ml-md-3">
+                                <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Friends to much more!</h4>
+                                    <p>We soon became great friends and started spending a lot of time together. 
+                                        We'd go for walks, cook food together, go around exploring campus!</p>
+                                    <p>Soon, we fell in love!</p>
+                                    <p>We went on many trips, hiking in national parks, exploring cities, to beaches!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row story-row">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center text-md-left ml-md-3">
+                                <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Proposal</h4>
+                                    <p class="mb-0">We had talked about getting married one day. In November 2022, Pranav asked Shivani if she'd spend the rest of her life with him, and she said yes!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
+                                <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row story-row">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
+                                <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center text-md-left ml-md-3">
+                                <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Engagement</h4>
+                                    <p class="mb-0">With our families' blessings, we got engaged to each other in March 2023 in Pune.</p>
+                                    <p class="mb-0">Fun fact: We met each other's families in person for the first time during the engagement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row story-row">
+                        <div class="col-md-12 border-right border-primary">
+                            <div class="text-center mr-md-3 mb-4 mb-md-0">
+                                <!-- <h6>What next?</h6> -->
+                                <p style="font-size: 18px;">We're really looking forward to our wedding and our life together.</p>
+                                <p style="font-size: 18px;">We can't wait to share our big day with you!</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- Story End -->
+
+
+            <!-- Gallery Start -->
+            <!-- <div class="container-fluid bg-gallery" id="gallery" style="padding: 120px 0; margin: 90px 0;">
+                <div class="section-title position-relative text-center" style="margin-bottom: 120px;">
+                    <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Gallery</h6>
+                    <h1 class="font-secondary display-4 text-white">Our Photo Gallery</h1>
+                    <i class="far fa-heart text-white"></i>
+                </div>
+                <div class="owl-carousel gallery-carousel">
+                    <div class="gallery-item">
+                        <img class="img-fluid w-100" src="img/gallery-1.jpg" alt="">
+                        <a href="img/gallery-1.jpg" data-lightbox="gallery">
+                            <i class="fa fa-2x fa-plus text-white"></i>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="img-fluid w-100" src="img/gallery-2.jpg" alt="">
+                        <a href="img/gallery-2.jpg" data-lightbox="gallery">
+                            <i class="fa fa-2x fa-plus text-white"></i>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="img-fluid w-100" src="img/gallery-3.jpg" alt="">
+                        <a href="img/gallery-3.jpg" data-lightbox="gallery">
+                            <i class="fa fa-2x fa-plus text-white"></i>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="img-fluid w-100" src="img/gallery-4.jpg" alt="">
+                        <a href="img/gallery-4.jpg" data-lightbox="gallery">
+                            <i class="fa fa-2x fa-plus text-white"></i>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="img-fluid w-100" src="img/gallery-5.jpg" alt="">
+                        <a href="img/gallery-5.jpg" data-lightbox="gallery">
+                            <i class="fa fa-2x fa-plus text-white"></i>
+                        </a>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="img-fluid w-100" src="img/gallery-6.jpg" alt="">
+                        <a href="img/gallery-6.jpg" data-lightbox="gallery">
+                            <i class="fa fa-2x fa-plus text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Gallery End -->
+
+
+            <!-- Event Start -->
+            <div class="container-fluid" id="events">
+                <div class="container py-5">
+                    <div class="position-relative text-center">
+                        <h1 class="font-secondary display-4">Events</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <h5 class="font-weight-normal text-muted mb-3 pb-3">Clita ipsum aliquyam dolor diam dolores elitr nonumy. Rebum sea vero ipsum eirmod tempor kasd. Diam amet lorem erat eos sit lorem elitr justo</h5>
+                        </div>
+                    </div>
+                    <div id="haldi" class="row event-details">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
+                                <img class="img-fluid mb-4" src="img/Haldi.png" alt="">
+                                <div id="haldi-overlay" class="expandable-img-overlay"><i id="haldi-zoom" class="fa fa-search-plus" style="padding: 5px; color:black; display:none;"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center text-md-left ml-md-3">
+                                <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Haldi</h4>
+                                    <p class="mb-0">26 Dec 2024</p>
+                                    <p class="mb-0">10:00AM - 2:00PM</p>
+                                    <p class="mb-2">B-181, 3rd Avenue, Sainikpuri, Hyderabad
+                                        (<a href="https://maps.app.goo.gl/9qebP9SW4p1uWWx19" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="sangeet" class="row event-details">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center text-md-left">
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Simantini & Sangeet</h4>
+                                    <p class="mb-0">26 Dec 2024</p>
+                                    <p class="mb-0">6:00PM onwards</p>
+                                    <p class="mb-2">Aalankrita Resorts, Hyderabad
+                                        (<a href="https://maps.app.goo.gl/NKTHQDdQvvFPvVeBA" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center expandable-img text-md-left ml-md-3">
+                                <img class="img-fluid mb-4" src="img/Sangeet.png" alt="">
+                                <div id="sangeet-overlay" class="expandable-img-overlay"><i id="sangeet-zoom" class="fa fa-search-plus" style="padding: 5px; color:#c4ab30; display:none;"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="shaadi" class="row event-details">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
+                                <img class="img-fluid mb-4" src="img/Wedding-Pranav.png" alt="">
+                                <div id="shaadi-overlay" class="expandable-img-overlay"><i id="shaadi-zoom" class="fa fa-search-plus" style="padding: 5px; color:black; display:none;"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center text-md-left">
+                                <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Shaadi</h4>
+                                    <p class="mb-0">27 Dec 2024</p>
+                                    <p class="mb-0">9:00AM onwards</p>
+                                    <p class="mb-2">Aalankrita Resorts, Hyderabad
+                                        (<a href="https://maps.app.goo.gl/NKTHQDdQvvFPvVeBA" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="reception" class="row event-details">
+                        <div class="col-md-6 border-right border-primary">
+                            <div class="text-center text-md-left">
+                                <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
+                                    <h4 class="mb-3">Reception</h4>
+                                    <p class="mb-0">11:00AM onwards</p>
+                                    <p class="mb-2">Hotel TipTop International, Pune
+                                        (<a href="https://maps.app.goo.gl/L8rvJ5F9bnUELUzH7" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center expandable-img text-md-left ml-md-3">
+                                <img class="img-fluid mb-4" src="img/Reception.png" alt="">
+                                <div id="reception-overlay" class="expandable-img-overlay"><i id="reception-zoom" class="fa fa-search-plus" style="padding: 5px; color:black; display:none;"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="eventsModal" style="display:none;">
+                <div class="menu-close menu-close-bg" onclick="toggleEventsModal()">X</div>
+                <!-- <div class="m-4"> -->
+                    <img src="img/404.png" height="100%" id="event-modal-img" style="display: block; margin:auto;">
+                <!-- </div> -->
+            </div>
+            <!-- Event End -->
+
+
+           <!-- RSVP Start -->
+            <div class="container-fluid" id="rsvp">
+                <div class="container py-5">
+                    <div class="position-relative text-center">
+                        <!-- <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6> -->
+                        <h1 class="font-secondary display-4">
+                            <!-- <img src="img/calendar.png" height="40px"/> -->
+                            RSVP
+                            <!-- <img src="img/calendar.png" height="40px"/></h1> -->
+                        <!-- <i class="far fa-heart text-dark"></i> -->
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <div>
+                                    <div id="rsvp_event_table" class="row justify-content-center mb-3"></div>
+                                    <button 
+                                    class="btn btn-primary font-weight-bold py-3 px-5"
+                                    style="display: inline-flex; width: 200px; margin: 10px;" 
+                                    onclick="saveRSVPinfo()"
+                                    >
+                                    <div class="load rotating" id="rsvpLoading" style="display:none"></div>
+                                    <span style="margin: auto;">Submit</span>
+                                </button>
+                                <div id="rsvpFailed" style="width: 100%; display:none;"><i class="fa fa-warning" style="color: rgb(255, 100, 100)"></i> Failed to save RSVP info, please try again</div>
+                                <div id="rsvpSuccess" style="width: 100%; display:none;"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> Success! RSVP info saved.</div>
+                                
+                            </div>
+                            <div id="travelInfoDiv" class="py-4" style="display: none;"> 
+                                <!-- Travel info -->
+                                    <datalist id="travel_port_suggestions">
+                                        <option value="HYD">(Airport)</option>
+                                        <option value="Secunderabad Junction (SC)">(Railway station)</option>
+                                        <option value="Begumpet (BMT)">(Railway station)</option>
+                                        <option value="Kacheguda (KCG)">(Railway station)</option>
+                                    </datalist>
+                                    <h6>Please share your travel info so we can arrange pickup</h6>
+                                    <div id="travel_info_table" class="row justify-content-center mb-3"></div>
+                                    <button 
+                                        class="btn btn-primary font-weight-bold py-3 px-5"
+                                        style="display: inline-flex; width: 200px; margin: 10px;" 
+                                        onclick="submitTravelInfo()"
+                                    >
+                                        <div class="load rotating" id="travelSubmitLoading" style="display:none"></div>
+                                        <span style="margin: auto;">Submit</span>
+                                    </button>
+                                    <div id="travelSubmitFailed" style="width: 100%; display:none;"><i class="fa fa-warning" style="color: rgb(255, 100, 100)"></i> Failed to save travel info, please try again</div>
+                                    <div id="travelSubmitSuccess" style="width: 100%; display:none;"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> Success! Travel info saved.</div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- RSVP End -->
+
+            <!-- Registry Start -->
+            <div class="container-fluid" id="gifts">
+                <div class="container py-5">
+                    <div class="position-relative text-center">
+                        <!-- <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6> -->
+                        <h1 class="font-secondary display-4">Gift registry</h1>
+                        <!-- <i class="far fa-heart text-dark"></i> -->
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <h5 class="font-weight-normal text-muted mb-3 pb-3 py-4">Your presence is enough of a present to us and all we want! But for those of you who insist on bringing us a present, we've put together a wish-list of things</h5>
+                            <div class="text-center">
+                                <a href="https://www.amazon.com" target="_blank"><button class="btn btn-primary font-weight-bold py-3 px-5"> See our gift registry </button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="text-center py-4">
+                                <div>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Registry End -->
+
+            <!-- Gallery Start -->
+            <div class="container-fluid" id="gallery">
+                <div class="container py-5">
+                    <div class="position-relative text-center">
+                        <!-- <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6> -->
+                        <h1 class="font-secondary display-4">Photo gallery</h1>
+                        <!-- <i class="far fa-heart text-dark"></i> -->
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <h5 class="font-weight-normal text-muted pt-4">Here are some photos from our lives, please add more you may have of our fun times together or from our wedding events</h5>
+                            <!-- <button class="add-photos" onclick="addPhotosModal()"><i class="fa fa-plus"> Add more photos</i> </button> -->
+                            <button onclick="window.open('https://google.com', '_blank');" class="add-photos"><i class="fa fa-plus"></i> Add to <img src="img/icons8-google-48.png" width="20px" height="20px"/> <img src="img/Google_Photos_icon.svg.png" width="20px" height="20px"/></button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="text-center py-4 gallery-grid">
+                                <img src="img/gallery-1.jpg">
+                                <img src="img/gallery-2.jpg">
+                                <img src="img/gallery-3.jpg">
+                                <img src="img/gallery-4.jpg">
+                                <img src="img/gallery-5.jpg">
+                                <img src="img/gallery-6.jpg">
+                                <img src="img/gallery-7.jpg">
+                                <img src="img/gallery-8.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="addPhotosModal" style="display:none;">
+                <div class="menu-close" onclick="toggleAddPhotosModal()">X</div>
+                <div class="m-4">
+                    <h1 class="font-secondary display-4 mb-3 pb-3">Upload to gallery</h1>
+                    <div class="my-3">
+                        <label for="select_event_for_photos">Event:</label>
+                        <select style="position: absolute; left: 250px;" class="event-select" name="select_event_for_photos" id="select_event_for_photos">
+                            <option value="general">General</option>
+                            <option value="mehendi">Mehendi</option>
+                            <option value="haldi">Haldi</option>
+                            <option value="sangeet">Sangeet</option>
+                            <option value="shaadi">Shaadi</option>
+                            <option value="reception">Reception</option>
+                        </select>
+                    </div>
+                    <div class="my-3 mb-3">
+                        <label>Upload photos:</label>
+                        <input id="upload-photos" style="position: absolute; left: 250px;" type="file" multiple="multiple"/><br/>
+                    </div>
+                    <div class="mb-3 pb-3">
+                        <button style="position: absolute; left: 200px;" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div class="my-3 pt-3" style="margin-left: 130px;">
+                        <p class="font-secondary display-4 mb-3 pb-3">or</p>
+                    </div>
+                    <div class="my-3">
+                        <label>Add directly to Google photos:</label>
+                        <button onclick="window.open('https://google.com', '_blank');" style="position: absolute; left: 250px;" class="add-photos"><i class="fa fa-plus"></i> Add to <img src="img/icons8-google-48.png" width="20px" height="20px"/> <img src="img/Google_Photos_icon.svg.png" width="20px" height="20px"/></button>
+                    </div>
+                </div>
+            </div>
+            <!-- Gallery End -->
+
+            <!-- Footer Start -->
+            <div class="" id="footer">
+                <div class="text-center py-4 text-white">
+                    This is the footer
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+
+
+        
+        
+        <!-- Scroll to Bottom -->
+        <!-- <i class="fa fa-2x fa-angle-down text-white scroll-to-bottom"></i> -->
+        
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-outline-primary btn-lg-square back-to-top" style="font-size: 40px; padding-top: 0">⌃</a>
+    </div>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <!-- <script src="lib/lightbox/js/lightbox.min.js"></script> -->
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <script>
+        
+        if (member_names.length == 1) {
+            document.getElementById("login_user_name").innerHTML = member_names[0];
+        }
+        else {
+            document.getElementById("login_user_name").innerHTML = member_names[0] + " + " + (member_names.length-1);
+        }
+
+        let viewport_height = window.innerHeight
+        let scroll_markings = [ 100, 250, 400, 550, 700, 900, 25000].map(function(x) {return x * viewport_height/100});
+        $(window).scroll(function(){
+            var currScroll = window.scrollY;
+            var index = 0
+            for (let i=0; i<$("#main-left").children().length; i+=1) {
+                let x = (scroll_markings[i+1]-currScroll)/viewport_height
+                if (x > 0 && x < 1) {
+                    x *= 2
+                }
+                $("#left-imgs-"+(i+1)).css("opacity", x)
+            }
+        });
+
+        $(document).on('click', 'a[href^="#"]', function (event) {
+            event.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+        });
+
+        let menuOpen = false;
+        let addPhotosModalOpen = false;
+        let eventsModalOpen = false;
+        function toggleMenu() {
+            document.getElementById('menu-sidebar').classList.toggle('toggle-menu');
+            document.getElementById('overlay').classList.toggle('overcast');
+            document.body.classList.toggle("disable-scroll")
+            menuOpen = !menuOpen;
+        }
+
+        $( "#overlay" ).on( "click", function() {
+            if (menuOpen) {
+                toggleMenu();
+            }
+            if (addPhotosModalOpen) {
+                toggleAddPhotosModal()
+            }
+            if (eventsModalOpen) {
+                toggleEventsModal()
+            }
+        });
+
+        // Display event details
+        invited_events.forEach(element => {
+            if (element==1) {
+                document.getElementById("shaadi").style.display = "flex"
+            }
+            if (element==2) {
+                document.getElementById("haldi").style.display = "flex"
+            }
+            if (element==3) {
+                document.getElementById("sangeet").style.display = "flex"
+            }
+            if (element==4) {
+                document.getElementById("reception").style.display = "flex"
+            }
+            
+        });
+
+        $("#haldi-overlay").hover(()=>{
+            $("#haldi-zoom").css('display', 'block');
+        }, ()=>{
+            $("#haldi-zoom").css('display', 'none');
+        })
+        $("#haldi-overlay").on( "click", ()=>{
+            toggleEventsModal()
+            $("#event-modal-img").attr("src", "img/Haldi.png");
+        });
+
+        $("#sangeet-overlay").hover(()=>{
+            $("#sangeet-zoom").css('display', 'block');
+        }, ()=>{
+            $("#sangeet-zoom").css('display', 'none');
+        })
+        $("#sangeet-overlay").on( "click", ()=>{
+            toggleEventsModal()
+            $("#event-modal-img").attr("src", "img/Sangeet.png");
+        });
+
+        $("#shaadi-overlay").hover(()=>{
+            $("#shaadi-zoom").css('display', 'block');
+        }, ()=>{
+            $("#shaadi-zoom").css('display', 'none');
+        })
+        $("#shaadi-overlay").on( "click", ()=>{
+            toggleEventsModal()
+            $("#event-modal-img").attr("src", "img/Wedding-Pranav.png");
+        });
+
+        $("#reception-overlay").hover(()=>{
+            $("#reception-zoom").css('display', 'block');
+        }, ()=>{
+            $("#reception-zoom").css('display', 'none');
+        })
+        $("#reception-overlay").on( "click", ()=>{
+            toggleEventsModal()
+            $("#event-modal-img").attr("src", "img/Reception.png");
+        });
+
+        function getRSVPEventsTable() {
+            // 1, 2, 3, 4 = Haldi, Sangeet, Shaadi, Reception
+
+            let events = ["Haldi", "Simantini & Sangeet", "Shaadi", "Reception"]
+
+            let inner_html = '<table id="RSVP_table"><tr><th></th>'
+            for (let event_id = 1; event_id <= 4; event_id+=1) {
+                if (invited_events.includes(event_id)) {
+                    inner_html += `<th class="rsvp_th">${events[event_id-1]}</th>`
+                }
+            }
+            inner_html += "</tr>"
+
+            for (let i=0; i<member_names.length; i+=1) {
+                let name = member_names[i];
+                inner_html += '<tr>'
+                inner_html += `<td class="rsvp_name">${name}</td>`;
+                for (let iei = 0; iei < invited_events.length; iei+=1) {
+                    event_id = invited_events[iei]
+                    name_event_rsvp = rsvp_dict[name][event_id]
+                    event = events[event_id-1]
+                    inner_html += '<td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+                    inner_html += '<input '
+                    if (name_event_rsvp) {
+                        inner_html += 'checked '
+                        $("#travelInfoDiv").css("display", "block")
+                    } 
+                    inner_html += `class="tgl tgl-flip rsvp_checkbox" type="checkbox" id="${name}_${event_id}" value="${name}_${event_id}"></input>`;
+                    inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
+                    }
+                    inner_html += '</tr>'
+            }
+            inner_html += "</table>"
+            document.getElementById("rsvp_event_table").innerHTML = inner_html;            
+        }
+        getRSVPEventsTable();
+
+        function travelSameAsAbove(i, checked) {
+            if (checked) {
+                datetime1 = document.getElementById(member_names[i]+"_datetime")
+                datetime2 = document.getElementById(member_names[i-1]+"_datetime")
+                datetime1.value = datetime2.value
+                datetime1.disabled = true
+
+                airport1 = document.getElementById(member_names[i]+"_airport")
+                airport2 = document.getElementById(member_names[i-1]+"_airport")
+                airport1.value = airport2.value
+                airport1.disabled = true
+
+                travel_other1 = document.getElementById(member_names[i]+"_travel_other")
+                travel_other2 = document.getElementById(member_names[i-1]+"_travel_other")
+                travel_other1.value = travel_other2.value
+                travel_other1.disabled = true
+            } else {
+                while (i < member_names.length) {
+                datetime1 = document.getElementById(member_names[i]+"_datetime")
+                datetime1.disabled = false
+                
+                airport1 = document.getElementById(member_names[i]+"_airport")
+                airport1.disabled = false
+
+                travel_other1 = document.getElementById(member_names[i]+"_travel_other")
+                travel_other1.disabled = false
+
+                document.getElementById(member_names[i]+"_same_as_above").checked = false
+
+                i += 1;
+                }
+            }
+        }
+
+        function getTravelInfoTable() {
+            let inner_html = '<table id="Travel_table"><tr><th></th>'
+            
+            inner_html += "<th></th>"
+            // inner_html += "<th>Airport/Railway station</th>"
+            // inner_html += "<th>Other info</th>"
+            inner_html += "</tr>"
+
+            for (let i=0; i<member_names.length; i+=1) {
+                let name = member_names[i];
+                // inner_html += '<tr>'
+                inner_html += `<tr`
+                if (i%2!=0) {
+                    inner_html += ` style="background-color: #eee;" `
+                }
+                inner_html += `><td class="travel_name" style="font-weight: bold; vertical-align: top; text-align: left; padding-top: 10px">${name}<br/>`;
+                if (i > 0) {
+                    inner_html += `<input type="checkbox" id="${name}_same_as_above" onchange="travelSameAsAbove(${i}, this.checked)"></input>`;
+                    inner_html += `<label style="font-weight: normal; padding: 0 5px;">Same as above</label>`;
+                    inner_html += '</td>'
+                }
+                inner_html += '<td>'
+                inner_html += '<table class="travel-subtable">'
+                inner_html += '<tr><td>Date/Time</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+                inner_html += `<input type="datetime-local" id="${name}_datetime"></input>`;
+                inner_html += `</div></td></tr>`;
+                inner_html += '<tr><td>Airport/Railway station</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+                inner_html += `<input type="text" id="${name}_airport" list="travel_port_suggestions"></input>`;
+                inner_html += `</div></td></tr>`;
+                inner_html += '<tr><td>Other info</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+                inner_html += `<input type="text" id="${name}_travel_other"></input>`;
+                inner_html += `</div></td></tr>`;
+                // inner_html += '<tr><td></td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+                // inner_html += `<input type="checkbox" id="${name}_same_as_above"></input>`;
+                // inner_html += `<label>Same as above</label>`;
+                // inner_html += `</div></td></tr>`;
+                inner_html += `</table>`;
+                inner_html += '</td></tr>'
+                // inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
+                // for (let iei = 0; iei < invited_events.length; iei+=1) {
+                //     event_id = invited_events[iei]
+                //     name_event_rsvp = rsvp_dict[name][event_id]
+                //     event = events[event_id-1]
+                //     inner_html += '<td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+                //     inner_html += '<input '
+                //     if (name_event_rsvp) {
+                //         inner_html += 'checked '
+                //     } 
+                //     inner_html += `class="tgl tgl-flip rsvp_checkbox" type="checkbox" id="${name}_${event_id}" value="${name}_${event_id}"></input>`;
+                //     inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
+                // }
+            }
+            inner_html += "</table>"
+            document.getElementById("travel_info_table").innerHTML = inner_html;
+        }
+        getTravelInfoTable();
+        for (let name in travel_info_dict) {
+            if (travel_info_dict.hasOwnProperty(name)) {
+                value = travel_info_dict[name];
+                document.getElementById(name+"_datetime").value = value["datetime"]
+                document.getElementById(name+"_airport").value = value["airport"]
+                document.getElementById(name+"_travel_other").value = value["other_info"]
+            }
+        }
+
+        async function get_post_response(url, payload) {
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                "Content-Type": "application/json",
+                }
+            });
+            if (response.status != '200') {
+                return {"status": "failed"}
+            }
+            const data = await response.json();
+            return data;
+        }
+
+        async function submitTravelInfo() {
+            $("#travelSubmitLoading").css("display", "block")
+            member_names.forEach(name => {
+                member_travel_info = {}
+                member_travel_info['datetime'] = document.getElementById(name+"_datetime").value;
+                member_travel_info['airport'] = document.getElementById(name+"_airport").value;
+                member_travel_info['other_info'] = document.getElementById(name+"_travel_other").value;
+                travel_info_dict[name] = member_travel_info
+            })
+            console.log(travel_info_dict)
+            // Call to AWS lambda to save RSVP info
+            url = "https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/"
+            body = {
+                "member_names": member_names,
+                "travel_info_dict": travel_info_dict,
+                "task": "travel_info"
+            }
+            response = await get_post_response(url, body);
+            if (response['status'] == 'success') {
+                $("#travelInfoFailed").css("display", "none");
+                $("#travelInfoSuccess").css("display", "block");
+                travel_info_dict = response["travel_info_dict"];
+                sessionStorage.setItem("travel_info_dict", JSON.stringify(travel_info_dict));
+            } else {
+                $("#travelInfoSuccess").css("display", "none");
+                $("#travelInfoFailed").css("display", "block");
+            }
+            $("#travelSubmitLoading").css("display", "none");
+        }
+
+        
+
+        var sleepSetTimeout_ctrl;
+        function sleep(ms) {
+            clearInterval(sleepSetTimeout_ctrl);
+            return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
+        }
+
+        async function saveRSVPinfo() {
+            $("#rsvpLoading").css("display", "block")
+            let table = document.getElementById("RSVP_table")
+            let trs = table.childNodes[0].childNodes
+            let first = true
+            let event_rsvps = {}
+            trs.forEach(tr => {
+                if (first) {
+                    first = false;
+                    // continue;
+                } else {
+                    let event_rsvp = {1:false, 2:false, 3:false, 4:false}
+                    let name = tr.childNodes[0].innerHTML
+                    let k = 1
+                    let coming = false
+                    for (let event_id = 1; event_id <=4; event_id+=1) {
+                        if (invited_events.includes(event_id)) {
+                            coming = tr.childNodes[k++].childNodes[0].childNodes[0].checked;
+                        }
+                        event_rsvp[event_id] = coming;
+                        coming = false;
+                    }
+                    event_rsvps[name] = event_rsvp
+                }
+            })
+            console.log(event_rsvps)
+            // Call to AWS lambda to save RSVP info
+            save_rsvp_url = "https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/"
+            save_rsvp_body = {
+                "member_names": member_names,
+                "rsvps": event_rsvps,
+                "task": "rsvp"
+            }
+            rsvp_response = await get_post_response(save_rsvp_url, save_rsvp_body);
+            if (rsvp_response['status'] == 'success') {
+                $("#rsvpFailed").css("display", "none");
+                $("#rsvpSuccess").css("display", "block");
+                rsvp_dict = rsvp_response["rsvp"];
+                sessionStorage.setItem("rsvp_dict", JSON.stringify(rsvp_dict));
+                $("#travelInfoDiv").css("display", "block");
+            } else {
+                $("#rsvpSuccess").css("display", "none");
+                $("#rsvpFailed").css("display", "block");
+            }
+            $("#rsvpLoading").css("display", "none");
+        }
+
+        function toggleAddPhotosModal() {
+            if (addPhotosModalOpen)
+                document.getElementById('addPhotosModal').style.display="none";
+            else
+                document.getElementById('addPhotosModal').style.display="block";
+            document.getElementById('overlay').classList.toggle('overcast');
+            document.body.classList.toggle("disable-scroll")
+            addPhotosModalOpen = !addPhotosModalOpen;
+        }
+
+        function toggleEventsModal() {
+            if (eventsModalOpen)
+                document.getElementById('eventsModal').style.display="none";
+            else
+                document.getElementById('eventsModal').style.display="block";
+            document.getElementById('overlay').classList.toggle('overcast');
+            document.getElementById('overlay').classList.toggle('overcast-dark');
+            document.body.classList.toggle("disable-scroll")
+            eventsModalOpen = !eventsModalOpen;
+        }
+
+        function addPhotosModal() {
+            toggleAddPhotosModal()
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+    
