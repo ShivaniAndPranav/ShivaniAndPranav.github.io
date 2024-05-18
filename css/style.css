@@ -9834,7 +9834,7 @@ a.text-dark:hover, a.text-dark:focus {
   animation: rotating 1s linear infinite;
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 1200px) {
   .login-left {
     width: 100%;
   }
