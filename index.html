@@ -14,6 +14,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <script>
         let member_names = JSON.parse(sessionStorage.getItem("member_names"));
         console.log(member_names);
@@ -55,7 +59,7 @@
             <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#story">Our story</a></div>
             <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#events">Events</a></div>
             <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#rsvp">RSVP</a></div>
-            <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#gifts">Gifts</a></div>
+            <!-- <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#gifts">Gifts</a></div> -->
             <div class="menu-item font-custom-1" onclick="toggleMenu()"><a href="#gallery">Photo gallery</a></div>
         </div>
         <div class="menu-footer">
@@ -67,17 +71,20 @@
     <div id="contentWrapper">
         <div class="top">
             <div class="main-left top-main-left"> 
-                <div class="container-fluid p-0" id="left-first">
-                    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" style="height: 100vh; min-height: 400px;">
-                                <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="object-fit: cover;">
+                <div class="container-fluid p-0" id="left-first"  style="height: 100%">
+                    <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel" style="height: 100%">
+                        <div class="carousel-inner" style="height: 100%">
+                            <div class="carousel-item active mobile-hidden" style="height: 100%">
+                                <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="height: 100%; object-fit: cover;">
                                 <div class="carousel-caption d-flex flex-column align-items-left justify-content-left">
                                     <div class="p-3" style="position: absolute; left: 35px;bottom: 35px;">
                                         <h1 class="display-4 font-secondary text-left text-white">Shivani & Pranav</h1>
                                         <h3 class="text-left font-custom-2 font-weight-normal text-white m-0" style="letter-spacing: 2px;">We can't wait to share our special day with you!</h3>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="carousel-item active mobile-only" style="height: 100%; background-image: url('img/Texture.png'); background-size: contain; background-color: rgba(0, 0, 0, 0.4); background-blend-mode: normal;">
+                                <img class="position-absolute w-100 h-100" src="img/Cover.png" style="object-fit: contain;">
                             </div>
                         </div>
                     </div>
@@ -88,11 +95,20 @@
                 <!-- <div style="height: 100vh;  min-height: 400px; min-width: 50vw; position: relative">
                     <img src="img/Cover-wedding-final-textured.png" style="position:absolute; top: -9999px; right: -9999px; left: -9999px; bottom: -9999px; margin: auto;" height="100%">
                 </div> -->
-                <div class="container-fluid p-0" id="left-first">
-                    <div id="header-carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" style="height: 100vh; min-height: 400px; background-image: url('img/Texture.png'); background-size: contain; background-color: rgba(0, 0, 0, 0.4); background-blend-mode: normal;">
+                <div class="container-fluid p-0" id="right-first" style="height: 100%">
+                    <div id="header-carousel" class="carousel slide" data-ride="carousel"  style="height: 100%">
+                        <div class="carousel-inner" style="height: 100%">
+                            <div class="carousel-item active  mobile-hidden" style="height: 100%; background-image: url('img/Texture.png'); background-size: contain; background-color: rgba(0, 0, 0, 0.4); background-blend-mode: normal;">
                                 <img class="position-absolute w-100 h-100" src="img/Cover.png" style="object-fit: contain;">
+                            </div>
+                            <div class="carousel-item active mobile-only" style="height: 100%">
+                                <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="height: 100%; object-fit: cover;">
+                                <div class="carousel-caption d-flex flex-column align-items-left justify-content-left">
+                                    <div class="p-3" style="position: absolute; left: 35px;bottom: 35px;">
+                                        <h1 class="display-4 font-secondary text-left text-white">Shivani & Pranav</h1>
+                                        <h3 class="text-left font-custom-2 font-weight-normal text-white m-0" style="letter-spacing: 2px;">We can't wait to share our special day with you!</h3>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -151,7 +167,7 @@
                         </div>
                     </div> -->
                     <div class="row story-row">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="first col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center text-md-left ml-md-3">
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
@@ -162,7 +178,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="second col-md-6">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
                                 <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
                             </div>
@@ -170,12 +186,12 @@
                     </div>
 
                     <div class="row story-row">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="second col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
                                 <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="first col-md-6">
                             <div class="text-center text-md-left ml-md-3">
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
@@ -190,7 +206,7 @@
                     </div>
 
                     <div class="row story-row">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="first col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center text-md-left ml-md-3">
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
@@ -199,7 +215,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="second col-md-6">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
                                 <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
                             </div>
@@ -207,12 +223,12 @@
                     </div>
 
                     <div class="row story-row">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class=" second col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
                                 <img class="img-fluid mb-4" src="img/story-1.jpg" alt="">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="first col-md-6">
                             <div class="text-center text-md-left ml-md-3">
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
@@ -225,7 +241,7 @@
                     </div>
 
                     <div class="row story-row">
-                        <div class="col-md-12 border-right border-primary">
+                        <div class="col-md-12 border-right border-primary mobile-no-border">
                             <div class="text-center mr-md-3 mb-4 mb-md-0">
                                 <!-- <h6>What next?</h6> -->
                                 <p style="font-size: 18px;">We're really looking forward to our wedding and our life together.</p>
@@ -302,13 +318,13 @@
                         </div>
                     </div>
                     <div id="haldi" class="row event-details">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="second col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
                                 <img class="img-fluid mb-4" src="img/Haldi.png" alt="">
                                 <div id="haldi-overlay" class="expandable-img-overlay"><i id="haldi-zoom" class="fa fa-search-plus" style="padding: 5px; color:black; display:none;"></i></div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="first col-md-6">
                             <div class="text-center text-md-left ml-md-3">
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
@@ -325,7 +341,7 @@
 
 
                     <div id="sangeet" class="row event-details">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="first col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center text-md-left">
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
                                     <h4 class="mb-3">Simantini & Sangeet</h4>
@@ -337,7 +353,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="second col-md-6">
                             <div class="text-center expandable-img text-md-left ml-md-3">
                                 <img class="img-fluid mb-4" src="img/Sangeet.png" alt="">
                                 <div id="sangeet-overlay" class="expandable-img-overlay"><i id="sangeet-zoom" class="fa fa-search-plus" style="padding: 5px; color:#c4ab30; display:none;"></i></div>
@@ -346,13 +362,13 @@
                     </div>
 
                     <div id="shaadi" class="row event-details">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="second col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
                                 <img class="img-fluid mb-4" src="img/Wedding-Pranav.png" alt="">
                                 <div id="shaadi-overlay" class="expandable-img-overlay"><i id="shaadi-zoom" class="fa fa-search-plus" style="padding: 5px; color:black; display:none;"></i></div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="first col-md-6">
                             <div class="text-center text-md-left">
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
@@ -368,7 +384,7 @@
                     </div>
 
                     <div id="reception" class="row event-details">
-                        <div class="col-md-6 border-right border-primary">
+                        <div class="first col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center text-md-left">
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
                                     <h4 class="mb-3">Reception</h4>
@@ -379,7 +395,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="second col-md-6">
                             <div class="text-center expandable-img text-md-left ml-md-3">
                                 <img class="img-fluid mb-4" src="img/Reception.png" alt="">
                                 <div id="reception-overlay" class="expandable-img-overlay"><i id="reception-zoom" class="fa fa-search-plus" style="padding: 5px; color:black; display:none;"></i></div>
@@ -392,7 +408,7 @@
             <div id="eventsModal" style="display:none;">
                 <div class="menu-close menu-close-bg" onclick="toggleEventsModal()">X</div>
                 <!-- <div class="m-4"> -->
-                    <img src="img/404.png" height="100%" id="event-modal-img" style="display: block; margin:auto;">
+                    <img src="img/404.png" id="event-modal-img" style="display: block; margin:auto;">
                 <!-- </div> -->
             </div>
             <!-- Event End -->
@@ -456,12 +472,10 @@
             <!-- RSVP End -->
 
             <!-- Registry Start -->
-            <div class="container-fluid" id="gifts">
+            <!-- <div class="container-fluid" id="gifts">
                 <div class="container py-5">
                     <div class="position-relative text-center">
-                        <!-- <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6> -->
                         <h1 class="font-secondary display-4">Gift registry</h1>
-                        <!-- <i class="far fa-heart text-dark"></i> -->
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-12">
@@ -481,7 +495,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Registry End -->
 
             <!-- Gallery Start -->
@@ -549,9 +563,14 @@
             <!-- Gallery End -->
 
             <!-- Footer Start -->
-            <div class="" id="footer">
+            <div class="bg-secondary" id="footer">
                 <div class="text-center py-4 text-white">
-                    This is the footer
+                    <div>
+                        <img src="img/sp-logo.png" width="200px">
+                    </div>
+                    <div class="logo-font" style="font-size: 20px; color: #953126;">
+                        December 2024
+                    </div>
                 </div>
             </div>
             <!-- Footer End -->
@@ -693,7 +712,7 @@
         function getRSVPEventsTable() {
             // 1, 2, 3, 4 = Haldi, Sangeet, Shaadi, Reception
 
-            let events = ["Haldi", "Simantini & Sangeet", "Shaadi", "Reception"]
+            let events = ["Haldi<br/>23 Dec<br/>10:30am", "Simantini & Sangeet", "Shaadi", "Reception"]
 
             let inner_html = '<table id="RSVP_table"><tr><th></th>'
             for (let event_id = 1; event_id <= 4; event_id+=1) {
@@ -762,6 +781,7 @@
         }
 
         function getTravelInfoTable() {
+            // Do ARRIVAL/DEPARTURE SEPARATELY
             let inner_html = '<table id="Travel_table"><tr><th></th>'
             
             inner_html += "<th></th>"
@@ -774,7 +794,7 @@
                 // inner_html += '<tr>'
                 inner_html += `<tr`
                 if (i%2!=0) {
-                    inner_html += ` style="background-color: #eee;" `
+                    inner_html += ` class="bg-secondary" `
                 }
                 inner_html += `><td class="travel_name" style="font-weight: bold; vertical-align: top; text-align: left; padding-top: 10px">${name}<br/>`;
                 if (i > 0) {
