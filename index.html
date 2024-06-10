@@ -312,11 +312,11 @@
                     <div class="position-relative text-center">
                         <h1 class="font-secondary display-4">Events</h1>
                     </div>
-                    <div class="row justify-content-center">
+                    <!-- <div class="row justify-content-center">
                         <div class="col-md-12">
                             <h5 class="font-weight-normal text-muted mb-3 pb-3">Clita ipsum aliquyam dolor diam dolores elitr nonumy. Rebum sea vero ipsum eirmod tempor kasd. Diam amet lorem erat eos sit lorem elitr justo</h5>
                         </div>
-                    </div>
+                    </div> -->
                     <div id="haldi" class="row event-details">
                         <div class="second col-md-6 border-right border-primary mobile-no-border">
                             <div class="text-center expandable-img text-md-right mr-md-3 mb-4 mb-md-0">
@@ -329,8 +329,8 @@
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
                                     <h4 class="mb-3">Haldi</h4>
-                                    <p class="mb-0">26 Dec 2024</p>
-                                    <p class="mb-0">10:00AM - 2:00PM</p>
+                                    <p class="mb-0">23 Dec 2024</p>
+                                    <p class="mb-0 font-secondary">10:30 am onwards</p>
                                     <p class="mb-2">B-181, 3rd Avenue, Sainikpuri, Hyderabad
                                         (<a href="https://maps.app.goo.gl/9qebP9SW4p1uWWx19" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
                                     </p>
@@ -345,9 +345,10 @@
                             <div class="text-center text-md-left">
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
                                     <h4 class="mb-3">Simantini & Sangeet</h4>
-                                    <p class="mb-0">26 Dec 2024</p>
-                                    <p class="mb-0">6:00PM onwards</p>
-                                    <p class="mb-2">Aalankrita Resorts, Hyderabad
+                                    <p class="mb-0">23 Dec 2024</p>
+                                    <p class="mb-0 font-secondary">6:00 pm onwards</p>
+                                    <p class="mb-0">Aananda Annexe, Aalankrita Resort</p>
+                                    <p class="mb-2">Secunderabad
                                         (<a href="https://maps.app.goo.gl/NKTHQDdQvvFPvVeBA" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
                                     </p>
                                 </div>
@@ -373,9 +374,11 @@
                                 <!-- <img class="img-fluid mb-4" src="img/event-2.jpg" alt=""> -->
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
                                     <h4 class="mb-3">Shaadi</h4>
-                                    <p class="mb-0">27 Dec 2024</p>
-                                    <p class="mb-0">9:00AM onwards</p>
-                                    <p class="mb-2">Aalankrita Resorts, Hyderabad
+                                    <p class="mb-0">24 Dec 2024</p>
+                                    <p class="mb-0 font-secondary">Baraat procession: 8:20 am</p>
+                                    <p class="mb-0 font-secondary">Lagna Muhurta: 9:29 am</p>
+                                    <p class="mb-0">Shubhamasthu lawns, Aalankrita Resort</p>
+                                    <p class="mb-2"> Secunderabad
                                         (<a href="https://maps.app.goo.gl/NKTHQDdQvvFPvVeBA" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
                                     </p>
                                 </div>
@@ -388,7 +391,7 @@
                             <div class="text-center text-md-left">
                                 <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3 mb-3">
                                     <h4 class="mb-3">Reception</h4>
-                                    <p class="mb-0">11:00AM onwards</p>
+                                    <p class="mb-0 font-secondary">11:00 am onwards</p>
                                     <p class="mb-2">Hotel TipTop International, Pune
                                         (<a href="https://maps.app.goo.gl/L8rvJ5F9bnUELUzH7" target="_blank"><i class="fa fa-map-marker"></i> Map</a>)
                                     </p>
@@ -451,22 +454,58 @@
                                         <option value="Kacheguda (KCG)">(Railway station)</option>
                                     </datalist>
                                     <h6>Please share your travel info so we can arrange pickup</h6>
-                                    <div id="travel_info_table" class="row justify-content-center mb-3"></div>
+                                    <div id="travel_info_table" class="row justify-content-center mb-3">
+                                        <div class="travel-row">
+                                            <div class="travel_name" style="font-weight: bold; vertical-align: top; text-align: left; padding-top: 10px">Pranav Asthana</div>
+                                            <div class="travel-subtable">
+                                                <div class="travel-subjourney">
+                                                    <p class="subjourney-type">Arrival</p>
+                                                    <div class="travel-subjourney-row">
+                                                        <label>Date/Time</label>
+                                                        <input type="datetime-local" id="arrival_${name}_datetime"></input>
+                                                    </div>
+                                                    <div class="travel-subjourney-row">
+                                                        <label>Airport/Railway station</label>
+                                                        <input type="text" id="$arrival_{name}_airport" list="travel_port_suggestions"></input>
+                                                    </div>
+                                                </div>
+                                                <div class="travel-subjourney">
+                                                    <p class="subjourney-type">Departure</p>
+                                                    <div class="travel-subjourney-row">
+                                                        <label>Date/Time</label>
+                                                        <input type="datetime-local" id="departure_${name}_datetime"></input>
+                                                    </div>
+                                                    <div class="travel-subjourney-row">
+                                                        <label>Airport/Railway station</label>
+                                                        <input type="text" id="departure_${name}_airport" list="travel_port_suggestions"></input>
+                                                    </div>
+                                                </div>
+                                                <div class="travel-subjourney">
+                                                    <p class="subjourney-type">Other info</p>
+                                                    <div class="travel-subjourney-row">
+                                                        <!-- <label>Other info</label> -->
+                                                        <input type="text" id="${name}_travel_other"></input>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                      
+                                    </div>
                                     <button 
-                                        class="btn btn-primary font-weight-bold py-3 px-5"
-                                        style="display: inline-flex; width: 200px; margin: 10px;" 
-                                        onclick="submitTravelInfo()"
+                                    class="btn btn-primary font-weight-bold py-3 px-5"
+                                    style="display: inline-flex; width: 200px; margin: 10px;" 
+                                    onclick="submitTravelInfo()"
                                     >
-                                        <div class="load rotating" id="travelSubmitLoading" style="display:none"></div>
-                                        <span style="margin: auto;">Submit</span>
-                                    </button>
-                                    <div id="travelSubmitFailed" style="width: 100%; display:none;"><i class="fa fa-warning" style="color: rgb(255, 100, 100)"></i> Failed to save travel info, please try again</div>
-                                    <div id="travelSubmitSuccess" style="width: 100%; display:none;"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> Success! Travel info saved.</div>
+                                    <div class="load rotating" id="travelSubmitLoading" style="display:none"></div>
+                                    <span style="margin: auto;">Submit</span>
+                                </button>
+                                <div id="travelSubmitFailed" style="width: 100%; display:none;"><i class="fa fa-warning" style="color: rgb(255, 100, 100)"></i> Failed to save travel info, please try again</div>
+                                <div id="travelSubmitSuccess" style="width: 100%; display:none;"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> Success! Travel info saved.</div>
                                 
                             </div>
                             </div>
+                            </div>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
             <!-- RSVP End -->
@@ -748,13 +787,23 @@
 
         function travelSameAsAbove(i, checked) {
             if (checked) {
-                datetime1 = document.getElementById(member_names[i]+"_datetime")
-                datetime2 = document.getElementById(member_names[i-1]+"_datetime")
+                datetime1 = document.getElementById('arrival_'+member_names[i]+"_datetime")
+                datetime2 = document.getElementById('arrival_'+member_names[i-1]+"_datetime")
                 datetime1.value = datetime2.value
                 datetime1.disabled = true
 
-                airport1 = document.getElementById(member_names[i]+"_airport")
-                airport2 = document.getElementById(member_names[i-1]+"_airport")
+                datetime1 = document.getElementById('departure_'+member_names[i]+"_datetime")
+                datetime2 = document.getElementById('departure_'+member_names[i-1]+"_datetime")
+                datetime1.value = datetime2.value
+                datetime1.disabled = true
+
+                airport1 = document.getElementById('arrival_'+member_names[i]+"_airport")
+                airport2 = document.getElementById('arrival_'+member_names[i-1]+"_airport")
+                airport1.value = airport2.value
+                airport1.disabled = true
+
+                airport1 = document.getElementById('departure_'+member_names[i]+"_airport")
+                airport2 = document.getElementById('departure_'+member_names[i-1]+"_airport")
                 airport1.value = airport2.value
                 airport1.disabled = true
 
@@ -764,10 +813,14 @@
                 travel_other1.disabled = true
             } else {
                 while (i < member_names.length) {
-                datetime1 = document.getElementById(member_names[i]+"_datetime")
+                datetime1 = document.getElementById('arrival_'+member_names[i]+"_datetime")
+                datetime1.disabled = false
+                datetime1 = document.getElementById('departure_'+member_names[i]+"_datetime")
                 datetime1.disabled = false
                 
-                airport1 = document.getElementById(member_names[i]+"_airport")
+                airport1 = document.getElementById('arrival_'+member_names[i]+"_airport")
+                airport1.disabled = false
+                airport1 = document.getElementById('departure_'+member_names[i]+"_airport")
                 airport1.disabled = false
 
                 travel_other1 = document.getElementById(member_names[i]+"_travel_other")
@@ -780,68 +833,127 @@
             }
         }
 
+        // function getTravelInfoTable() {
+        //     // Do ARRIVAL/DEPARTURE SEPARATELY
+        //     let inner_html = '<table id="Travel_table"><tr><th></th>'
+            
+        //     inner_html += "<th></th>"
+        //     // inner_html += "<th>Airport/Railway station</th>"
+        //     // inner_html += "<th>Other info</th>"
+        //     inner_html += "</tr>"
+
+        //     for (let i=0; i<member_names.length; i+=1) {
+        //         let name = member_names[i];
+        //         // inner_html += '<tr>'
+        //         inner_html += `<tr`
+        //         if (i%2!=0) {
+        //             inner_html += ` class="bg-secondary" `
+        //         }
+        //         inner_html += `><td class="travel_name" style="font-weight: bold; vertical-align: top; text-align: left; padding-top: 10px">${name}<br/>`;
+        //         if (i > 0) {
+        //             inner_html += `<input type="checkbox" id="${name}_same_as_above" onchange="travelSameAsAbove(${i}, this.checked)"></input>`;
+        //             inner_html += `<label style="font-weight: normal; padding: 0 5px;">Same as above</label>`;
+        //             inner_html += '</td>'
+        //         }
+        //         inner_html += '<td>'
+        //         inner_html += '<table class="travel-subtable">'
+        //         inner_html += '<tr><td>Date/Time</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+        //         inner_html += `<input type="datetime-local" id="${name}_datetime"></input>`;
+        //         inner_html += `</div></td></tr>`;
+        //         inner_html += '<tr><td>Airport/Railway station</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+        //         inner_html += `<input type="text" id="${name}_airport" list="travel_port_suggestions"></input>`;
+        //         inner_html += `</div></td></tr>`;
+        //         inner_html += '<tr><td>Other info</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+        //         inner_html += `<input type="text" id="${name}_travel_other"></input>`;
+        //         inner_html += `</div></td></tr>`;
+        //         // inner_html += '<tr><td></td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+        //         // inner_html += `<input type="checkbox" id="${name}_same_as_above"></input>`;
+        //         // inner_html += `<label>Same as above</label>`;
+        //         // inner_html += `</div></td></tr>`;
+        //         inner_html += `</table>`;
+        //         inner_html += '</td></tr>'
+        //         // inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
+        //         // for (let iei = 0; iei < invited_events.length; iei+=1) {
+        //         //     event_id = invited_events[iei]
+        //         //     name_event_rsvp = rsvp_dict[name][event_id]
+        //         //     event = events[event_id-1]
+        //         //     inner_html += '<td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
+        //         //     inner_html += '<input '
+        //         //     if (name_event_rsvp) {
+        //         //         inner_html += 'checked '
+        //         //     } 
+        //         //     inner_html += `class="tgl tgl-flip rsvp_checkbox" type="checkbox" id="${name}_${event_id}" value="${name}_${event_id}"></input>`;
+        //         //     inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
+        //         // }
+        //     }
+        //     inner_html += "</table>"
+        //     document.getElementById("travel_info_table").innerHTML = inner_html;
+        // }
         function getTravelInfoTable() {
             // Do ARRIVAL/DEPARTURE SEPARATELY
-            let inner_html = '<table id="Travel_table"><tr><th></th>'
+            let inner_html = ''
             
-            inner_html += "<th></th>"
-            // inner_html += "<th>Airport/Railway station</th>"
-            // inner_html += "<th>Other info</th>"
-            inner_html += "</tr>"
-
             for (let i=0; i<member_names.length; i+=1) {
                 let name = member_names[i];
-                // inner_html += '<tr>'
-                inner_html += `<tr`
-                if (i%2!=0) {
-                    inner_html += ` class="bg-secondary" `
-                }
-                inner_html += `><td class="travel_name" style="font-weight: bold; vertical-align: top; text-align: left; padding-top: 10px">${name}<br/>`;
-                if (i > 0) {
-                    inner_html += `<input type="checkbox" id="${name}_same_as_above" onchange="travelSameAsAbove(${i}, this.checked)"></input>`;
-                    inner_html += `<label style="font-weight: normal; padding: 0 5px;">Same as above</label>`;
-                    inner_html += '</td>'
-                }
-                inner_html += '<td>'
-                inner_html += '<table class="travel-subtable">'
-                inner_html += '<tr><td>Date/Time</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
-                inner_html += `<input type="datetime-local" id="${name}_datetime"></input>`;
-                inner_html += `</div></td></tr>`;
-                inner_html += '<tr><td>Airport/Railway station</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
-                inner_html += `<input type="text" id="${name}_airport" list="travel_port_suggestions"></input>`;
-                inner_html += `</div></td></tr>`;
-                inner_html += '<tr><td>Other info</td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
-                inner_html += `<input type="text" id="${name}_travel_other"></input>`;
-                inner_html += `</div></td></tr>`;
-                // inner_html += '<tr><td></td><td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
-                // inner_html += `<input type="checkbox" id="${name}_same_as_above"></input>`;
-                // inner_html += `<label>Same as above</label>`;
-                // inner_html += `</div></td></tr>`;
-                inner_html += `</table>`;
-                inner_html += '</td></tr>'
-                // inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
-                // for (let iei = 0; iei < invited_events.length; iei+=1) {
-                //     event_id = invited_events[iei]
-                //     name_event_rsvp = rsvp_dict[name][event_id]
-                //     event = events[event_id-1]
-                //     inner_html += '<td class="rsvp-checkbox-td"><div class="checkbox-wrapper-10">'
-                //     inner_html += '<input '
-                //     if (name_event_rsvp) {
-                //         inner_html += 'checked '
-                //     } 
-                //     inner_html += `class="tgl tgl-flip rsvp_checkbox" type="checkbox" id="${name}_${event_id}" value="${name}_${event_id}"></input>`;
-                //     inner_html += `<label class="tgl-btn" data-tg-off="No" data-tg-on="Yes!" for="${name}_${event_id}"></label></div></td>`
+
+                let template = `
+                    <div class="travel-row ${i%2!=0?'bg-secondary':'bg-secondary-20'}">
+                        <div class="travel_name">
+                            <span  style="font-weight: bold; vertical-align: top; text-align: left; padding-top: 10px">${name}</span><br/>
+                            <input type="checkbox" id="${name}_same_as_above" onchange="travelSameAsAbove(${i}, this.checked)"> Same as above</input>
+                        </div>
+                        <div class="travel-subtable">
+                            <div class="travel-subjourney">
+                                <p class="subjourney-type">Arrival</p>
+                                <div class="travel-subjourney-row">
+                                    <label>Date/Time</label>
+                                    <input type="datetime-local" id="arrival_${name}_datetime"></input>
+                                </div>
+                                <div class="travel-subjourney-row">
+                                    <label>Airport/Railway station</label>
+                                    <input type="text" id="arrival_${name}_airport" list="travel_port_suggestions"></input>
+                                </div>
+                            </div>
+                            <div class="travel-subjourney">
+                                <p class="subjourney-type">Departure</p>
+                                <div class="travel-subjourney-row">
+                                    <label>Date/Time</label>
+                                    <input type="datetime-local" id="departure_${name}_datetime"></input>
+                                </div>
+                                <div class="travel-subjourney-row">
+                                    <label>Airport/Railway station</label>
+                                    <input type="text" id="departure_${name}_airport" list="travel_port_suggestions"></input>
+                                </div>
+                            </div>
+                            <div class="travel-subjourney">
+                                <p class="subjourney-type">Other info</p>
+                                <div style="text-align: left">
+                                    <input type="text" id="${name}_travel_other"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+                inner_html += template
+                // if (i%2!=0) {
+                //     inner_html += ` bg-secondary">`
+                // } else {
+                //     inner_html += `">`
                 // }
             }
-            inner_html += "</table>"
+            // inner_html += "</table>"
             document.getElementById("travel_info_table").innerHTML = inner_html;
         }
         getTravelInfoTable();
         for (let name in travel_info_dict) {
             if (travel_info_dict.hasOwnProperty(name)) {
                 value = travel_info_dict[name];
-                document.getElementById(name+"_datetime").value = value["datetime"]
-                document.getElementById(name+"_airport").value = value["airport"]
+                document.getElementById("arrival_"+name+"_datetime").value = value["arrival_datetime"]
+                document.getElementById("arrival_"+name+"_airport").value = value["arrival_airport"]
+                
+                document.getElementById("departure_"+name+"_datetime").value = value["departure_datetime"]
+                document.getElementById("departure_"+name+"_airport").value = value["departure_airport"]
+                
                 document.getElementById(name+"_travel_other").value = value["other_info"]
             }
         }
@@ -865,8 +977,10 @@
             $("#travelSubmitLoading").css("display", "block")
             member_names.forEach(name => {
                 member_travel_info = {}
-                member_travel_info['datetime'] = document.getElementById(name+"_datetime").value;
-                member_travel_info['airport'] = document.getElementById(name+"_airport").value;
+                member_travel_info['arrival_datetime'] = document.getElementById("arrival_"+name+"_datetime").value;
+                member_travel_info['arrival_airport'] = document.getElementById("arrival_"+name+"_airport").value;
+                member_travel_info['departure_datetime'] = document.getElementById("departure_"+name+"_datetime").value;
+                member_travel_info['departure_airport'] = document.getElementById("departure_"+name+"_airport").value;
                 member_travel_info['other_info'] = document.getElementById(name+"_travel_other").value;
                 travel_info_dict[name] = member_travel_info
             })
