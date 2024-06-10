@@ -100,17 +100,18 @@
 
     <div class="login">
         <div class="login-left">
-            <div class="container-fluid p-0" id="left-first">
-                <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" style="height: 100vh; min-height: 400px;">
-                            <img class="position-absolute w-100 h-100" src="../img/carousel-1.jpg" style="object-fit: cover;">
-                            <div class="carousel-caption d-flex flex-column align-items-left justify-content-left">
+            <div class="container-fluid p-0" id="left-first"  style="height: 100%; margin-right: 0px;">
+                <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel"  style="height: 100%">
+                    <div class="carousel-inner" style="height: 100%">
+                        
+                        <div class="carousel-item active" style="height: 100%; background-image: url('../mg/Texture.png'); background-size: contain;">
+                            <img class="position-absolute w-100 h-100" src="../img/Cover.png" style="object-fit: contain;">
+                            <!-- <div class="carousel-caption d-flex flex-column align-items-left justify-content-left">
                                 <div class="p-3" style="position: absolute; left: 35px;bottom: 35px;">
                                     <h1 class="display-4 font-secondary text-left text-white">Shivani & Pranav</h1>
                                     <h3 class="text-left font-custom-2 font-weight-normal text-white m-0" style="letter-spacing: 2px;">We can't wait to share our special day with you!</h3>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -119,10 +120,11 @@
 
         <div class="login-right">
             <div id="login-details" style="margin: auto; text-align: center;">
-                <h1 class="font-secondary display-4" style="text-align: center; margin-top: 50px">Let's find your invite</h1><br/>
+                <h1 class="font-secondary display-4" style="text-align: center; margin-top: 50px">Welcome!</h1>
+                <p>Please login here</p>
                     <div id="loginForm" style="width: 80%; margin: auto;">
-                        <input id="login-name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Name" style="margin: 10px"/>
-                        <input id="login-email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Email (optional)" style="margin: 10px"/>
+                        <input id="login-name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Full Name" style="margin: 10px;"/>
+                        <input id="login-email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Email (optional)" style="margin: 10px;"/>
                         <div id="name_not_found_error" style="display: none;"><i class="fa fa-warning"></i> Name not found, please try again</div>
                         <button 
                             class="btn btn-primary font-weight-bold py-3 px-5" 
@@ -134,10 +136,10 @@
                         </button>
                     </div>
             </div>
-            <div id="confirm-details" style="margin: auto; padding: 0 50px; display:none">
-                <h1 class="font-secondary display-4" style="text-align: center; margin-top: 50px">Let's find your invite</h1><br/>
+            <div id="confirm-details" style="margin: auto; padding: 100px 50px; display:none">
+                <!-- <h1 class="font-secondary display-4" style="text-align: center; margin-top: 50px">Welcome!</h1><br/> -->
                     <!-- Show the members and ask for confirmation -->
-                    <p>RSVP for these family members:</p>
+                    <p style="font-size: 18px;">RSVP for these family members:</p>
                     <div id="confirmForm" style="width: 80%; margin: auto;">
                         <div id="members"></div>
                         <button class="btn btn-primary font-we1ight-bold py-3 px-5" onclick="confirmMembers()"  style="margin: 20px 0">Confirm</button>
