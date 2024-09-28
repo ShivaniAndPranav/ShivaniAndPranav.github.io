@@ -10203,6 +10203,8 @@ a.text-dark:hover, a.text-dark:focus {
 
 .rsvp_th {
   text-align: left;
+  font-weight: 550;
+  vertical-align: top;
 }
 
 .rsvp-checkbox-td {
