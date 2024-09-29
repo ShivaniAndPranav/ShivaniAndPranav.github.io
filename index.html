@@ -1062,25 +1062,21 @@
             let trs = table.childNodes[0].childNodes
             let first = true
             let event_rsvps = {}
-            trs.forEach(tr => {
-                if (first) {
-                    first = false;
-                    // continue;
-                } else {
-                    let event_rsvp = {1:false, 2:false, 3:false, 4:false}
-                    let name = tr.childNodes[0].innerHTML
-                    let k = 1
-                    let coming = false
-                    for (let event_id = 1; event_id <=4; event_id+=1) {
-                        if (invited_events.includes(event_id)) {
-                            coming = tr.childNodes[k++].childNodes[0].childNodes[0].checked;
-                        }
-                        event_rsvp[event_id] = coming;
-                        coming = false;
+            for(let idx=2; idx<trs.length; idx++){
+                let tr = trs[idx]
+                let event_rsvp = {1:false, 2:false, 3:false, 4:false}
+                let name = tr.childNodes[0].innerHTML
+                let k = 1
+                let coming = false
+                for (let event_id = 1; event_id <=4; event_id+=1) {
+                    if (invited_events.includes(event_id)) {
+                        coming = tr.childNodes[k++].childNodes[0].childNodes[0].checked;
                     }
-                    event_rsvps[name] = event_rsvp
+                    event_rsvp[event_id] = coming;
+                    coming = false;
                 }
-            })
+                event_rsvps[name] = event_rsvp
+            }
             console.log(event_rsvps)
             // Call to AWS lambda to save RSVP info
             save_rsvp_url = "https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/"
