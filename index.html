@@ -712,13 +712,13 @@
         // Display event details
         invited_events.forEach(element => {
             if (element==1) {
-                document.getElementById("shaadi").style.display = "flex"
-            }
-            if (element==2) {
                 document.getElementById("haldi").style.display = "flex"
             }
-            if (element==3) {
+            if (element==2) {
                 document.getElementById("sangeet").style.display = "flex"
+            }
+            if (element==3) {
+                document.getElementById("shaadi").style.display = "flex"
             }
             if (element==4) {
                 document.getElementById("reception").style.display = "flex"
@@ -783,6 +783,10 @@
 
             let inner_html = '<table id="RSVP_table"><tr><th></th>'
             for (let event_id = 1; event_id <= 4; event_id+=1) {
+                if (invited_events.length == 1) {
+                    inner_html += `<td style="display"none;"></td>`;
+                    break
+                }
                 if (invited_events.includes(event_id)) {
                     inner_html += `<th class="rsvp_th">${events[event_id-1]}</th>`
                 }
@@ -792,7 +796,7 @@
             inner_html += "<tr><td></td>"
             for (let event_id = 1; event_id <= 4; event_id+=1) {
                 if (invited_events.includes(event_id)) {
-                    inner_html += `<td style="text-align: left; font-weight: 100; font-size: 14px; white-space: nowrap;">${event_times[event_id-1]}</th>`
+                    inner_html += `<td style="text-align: left; font-weight: 100; font-size: 14px; white-space: nowrap;">${event_times[event_id-1]}</td>`
                     }
                 }
             inner_html += "</tr>"
