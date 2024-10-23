@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shivani and Pranav</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <!-- Favicon -->
+    <link href="../img/favicon.png" type="image/x-icon" rel="icon">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/admin-style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        async function get_post_response(url, payload) {
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                "Content-Type": "application/json",
+                }
+            });
+            const data = await response.json();
+            return data;
+        }
+
+        async function admin_login() {
+            let admin_password_entered = document.getElementById("admin-password").value;
+            admin_status = await get_post_response("https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/", {"password":admin_password_entered, "task":"admin-login"})
+            admin_success = false;
+            if (admin_status['status'] == 'success') {
+                admin_success = true;
+            }
+            if (!admin_success) {
+                // window.location.href = "pages/login.html";
+                document.getElementById("admin-password").value = ""
+                return false;
+            }
+            document.getElementById("admin-login-div").style.display = "none";
+            document.getElementById("admin-panel-div").style.display = "block";
+            sessionStorage.setItem("admin_success", JSON.stringify(admin_success));
+            return true;
+        }
+
+        async function fetch_guest_data() {
+            if (sessionStorage.getItem("admin_success")) {
+                if (sessionStorage.getItem("all_guest_data")) {
+                    return JSON.parse(sessionStorage.getItem("all_guest_data"));
+                }
+                guest_data = await get_post_response("https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/", {"task":"admin"})
+                guest_data = guest_data['data']
+                sessionStorage.setItem("all_guest_data", JSON.stringify(guest_data));
+                return guest_data;
+            }
+        }
+    </script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="51">
+    
+    <div>
+
+            <div class="mobile-hidden" style="position: absolute; top: 0; left: 0;">
+                <img style="height: 100px;" src='../img/sp-logo.png'>
+            </div>
+            <div class="mobile-hidden" style="position: absolute; top: 0; right: 0;">
+                <img style="height: 100px;" src='../img/sp-logo.png'>
+            </div>
+            <div id="admin-login-div" style="margin: auto; text-align: center;">
+                <h1 class="display-4" style="text-align: center; margin-top: 50px">Welcome to the admin panel!</h1>
+                <p>Please enter admin password</p>
+                    <div style="width: 80%; margin: auto;">
+                        <input id="admin-password" type="password" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Admin password" style="margin: 10px;"/>
+                        <button 
+                            class="btn btn-primary font-weight-bold py-3 px-5" 
+                            style="display: inline-flex; width: 200px;" 
+                            onclick="admin_login()"
+                        >
+                            <div class="load rotating" id="loginLoading" style="display:none"></div>
+                            <span style="margin: auto;">Submit</span>
+                        </button>
+                    </div>
+            </div>
+            <div id="admin-panel-div" style="display:none; margin: auto; text-align: center;">
+                <h1>Admin panel</h1>
+                <a href="../index.html">Go to main page</a>
+                <!-- <div id="addNewGuest" style="background-color: blanchedalmond; padding: 20px; border-radius: 10px; width: 30%; margin: auto; text-align: left;">
+                    <h6>Add a new guest</h6>
+                    <table>
+                        <tr><th></th><th></th></tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td><input type="text" id="add_name"/> </td>
+                        </tr>
+                        <tr>
+                            <td>Email (optional):</td>
+                            <td><input type="text" id="add_email"/> </td>
+                        </tr>
+                    </table>
+                    <b>Events:</b> </br>
+                    <input type="checkbox" id="add_haldi" style="margin-left: 30px;"> Haldi
+                    <input type="checkbox" id="add_sangeet" style="margin-left: 30px;"> Sangeet
+                    <input type="checkbox" id="add_shaadi" style="margin-left: 30px;"> Shaadi
+                    </br>
+                    <button class="btn-primary" style="margin-left: 40%;" onclick="addNewGuest()">Save</button>
+                </div> -->
+                <div id="guest-info"></div>
+
+            </div>
+        
+    </div>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <!-- <script src="lib/lightbox/js/lightbox.min.js"></script> -->
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <script>
+
+        if (JSON.parse(sessionStorage.getItem("admin_success"))) {
+            document.getElementById("admin-login-div").style.display = "none";
+            document.getElementById("admin-panel-div").style.display = "block";
+            fetch_guest_data()
+        }
+
+        async function addNewGuest() {
+            name = document.getElementById("add_name").value
+            email = document.getElementById("add_email").value
+            haldi = document.getElementById("add_haldi").value
+            sangeet = document.getElementById("add_sangeet").value
+            shaadi = document.getElementById("add_shaadi").value
+
+            // Check if already exists, then don't add
+            guest_data = await fetch_guest_data()
+            guest_data.forEach(element => {
+                keys = Object.keys(element)
+                console.log(element['Name'], name)
+                console.log(element['Name']==name) // This is not working
+                if (element['Name'] == name) {
+                    console.log("Duplicate entry, skipping")
+                    console.log(name)
+                    return
+                }
+            });
+
+            console.log("New entry")
+
+
+        }
+
+        async function populateGuestData() {
+            guest_data = await fetch_guest_data()
+            // Add the guest data to the admin panel for viewing
+            headers = ["Name", "Group", "Haldi", "Sangeet", "Shaadi", "Travel"]
+            let inner_html = '<table id="admin-table"><tr>'
+            for (let hid = 0; hid <= 5; hid+=1) {
+                inner_html += `<th>${headers[hid]}</th>`
+            }
+            inner_html += "</tr>"
+
+            total_haldi = 0
+            total_sangeet = 0
+            total_shaadi = 0
+            accepted_haldi = 0
+            accepted_sangeet = 0
+            accepted_shaadi = 0
+            guest_data.forEach(element => {
+                keys = Object.keys(element)
+                let events = element[keys[2]]
+                total_haldi += events.includes("1")
+                total_sangeet += events.includes("2")
+                total_shaadi += events.includes("3")
+                if (element["RSVP"]!="") {
+                    rsvp = JSON.parse(element["RSVP"])
+                    accepted_haldi += (rsvp!=""&&rsvp["1"])
+                    accepted_sangeet += (rsvp!=""&&rsvp["2"])
+                    accepted_shaadi += (rsvp!=""&&rsvp["3"])
+                }
+            });
+            
+            color = 0
+            prev_group = -1
+            prev_travel = ""
+
+            inner_html += '<tr style="border-bottom: 1px solid">'
+            inner_html += `<td class="admin-name">Total</td>`;
+            inner_html += `<td></td>`;
+            inner_html += `<td>Yes=${accepted_haldi}/${total_haldi}</td>`;
+            inner_html += `<td>Yes=${accepted_sangeet}/${total_sangeet}</td>`;
+            inner_html += `<td>Yes=${accepted_shaadi}/${total_shaadi}</td>`;
+            inner_html += `<td></td>`;
+            inner_html += `</tr>`;
+
+            for (let i=0; i<guest_data.length; i+=1) {
+                keys = Object.keys(guest_data[i])
+                let name = guest_data[i]["Name"].replaceAll("\"", "");
+                let group = guest_data[i]["Group"];
+                let events = guest_data[i][keys[2]] // "Events (1=Haldi, 2=Sangeet, 3=Shaadi, 4=Reception)"
+                let rsvp = guest_data[i]["RSVP"]
+                let travel = guest_data[i][keys[5]]
+                if (group != prev_group) {
+                    color += 1;
+                    prev_group = group;
+                }
+                if (rsvp != "")
+                    rsvp = JSON.parse(rsvp)
+                inner_html += `<tr class="${color%2!=0?'bg-secondary':'bg-secondary-20'}">`
+                inner_html += `<td class="admin-name">${name}</td>`;
+                inner_html += `<td>${group}</td>`;
+                if (events.includes("1")) {
+                    if (rsvp=="") {
+                        inner_html += `<td class="admin-invited">Invited</td>`;
+                    }
+                    else if (rsvp["1"]==false) {
+                        inner_html += `<td class="admin-uninvited">Rejected</td>`;
+                    }
+                    else if (rsvp["1"]==true) {
+                        inner_html += `<td class="admin-accepted">Accepted</td>`;
+                    }
+                }
+                else {
+                    inner_html += `<td class="admin-uninvited">Not invited</td>`;
+                }
+
+                if (events.includes("2")) {
+                    if (rsvp=="") {
+                        inner_html += `<td class="admin-invited">Invited</td>`;
+                    }
+                    else if (rsvp["2"]==false) {
+                        inner_html += `<td class="admin-uninvited">Rejected</td>`;
+                    }
+                    else if (rsvp["2"]==true) {
+                        inner_html += `<td class="admin-accepted">Accepted</td>`;
+
+                    }
+                }
+                else {
+                    inner_html += `<td class="admin-uninvited">Not invited</td>`;
+                }
+
+                if (events.includes("3")) {
+                    if (rsvp=="") {
+                        inner_html += `<td class="admin-invited">Invited</td>`;
+                    }
+                    else if (rsvp["3"]==false) {
+                        inner_html += `<td class="admin-uninvited">Rejected</td>`;
+                    }
+                    else if (rsvp["3"]==true) {
+                        inner_html += `<td class="admin-accepted">Accepted</td>`;
+
+                    }
+                }
+                else {
+                    inner_html += `<td class="admin-uninvited">Not invited</td>`;
+                } 
+                if (prev_travel != travel) {
+                    prev_travel = travel;
+                    travel = JSON.parse(travel)
+                    if (travel != "") {
+                        // console.log(travel)
+                        inner_html += `<td class="admin-travel" style="text-align: left;"><div style="height: 100px;">`;
+                        // inner_html += `=====================\n`;
+                        // inner_html += `-----------------------\n`;
+                        inner_html += `Arrival: ${travel['arrival_datetime']}\n`;
+                        inner_html += `Arrival location: ${travel['arrival_airport']}\n`;
+                        inner_html += `Departure: ${travel['departure_datetime']}\n`;
+                        inner_html += `Departure location: ${travel['departure_airport']}\n`;
+                        inner_html += `Other info: ${travel['other_info']}\n`;
+                        // inner_html += `-----------------------\n`;
+                        // inner_html += `=====================\n`;
+                        inner_html += `</div></td>`;
+                    } else {
+                        inner_html += `<td class="admin-travel"></td>`;
+                    }
+                } else {
+                    travel = JSON.parse(travel)
+                    if (travel == "") {
+                        inner_html += `<td class="admin-travel"></td>`;
+                    } else {
+                        console.log(travel)
+                        inner_html += `<td class="admin-travel">Same as above</td>`;
+                    }
+                }
+                
+                inner_html += '</tr>'
+            }
+            inner_html += "</table>"
+            document.getElementById("guest-info").innerHTML = inner_html;
+        }
+        populateGuestData();
+
+    </script>
+</body>
+
+</html>
+
+
+    
