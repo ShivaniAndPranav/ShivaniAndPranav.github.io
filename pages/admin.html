@@ -95,7 +95,7 @@
             <div id="admin-panel-div" style="display:none; margin: auto; text-align: center;">
                 <h1>Admin panel</h1>
                 <a href="../index.html">Go to main page</a>
-                <div id="addNewGuest" style="background-color: blanchedalmond; padding: 20px; border-radius: 10px; width: 30%; margin: auto; text-align: left;">
+                <div id="addNewGuest">
                     <h6>Add a new guest</h6>
                     <table>
                         <tr><th></th><th></th></tr>
@@ -118,6 +118,7 @@
                     <div id="add_guest_success" style="display:none"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> <span id="add_guest_success_text">Success! New guest info saved.</span></div>
                 </div>
                 <div id="guest-info"></div>
+                <div id="logs"></div>
 
             </div>
         
@@ -214,6 +215,22 @@
             }
             document.getElementById("add_guest_spinning").style.display = "none";
             populateGuestData(true);
+        }
+
+        function make_log_table(json_data) {
+            inner_html = `<table id="log_table" style="width: 80%; margin: auto;"><tr><th>Name</th><th>Event</th><th>Datetime</th><th>Data</th></tr>`
+            for (let idx=json_data.length-1; idx>=0; idx--) {
+                data = json_data[idx]['Data'].trim().replaceAll("\"", "")
+                // data = JSON.stringify(JSON.parse(data))
+                inner_html += `<tr>`
+                inner_html += `<td style="text-transform: capitalize;">${json_data[idx]['Name'].trim().replaceAll("\"", "")}</td>`
+                inner_html += `<td>${json_data[idx]['Event'].trim().replaceAll("\"", "")}</td>`
+                inner_html += `<td>${json_data[idx]['Datetime'].trim().replaceAll("\"", "")}</td>`
+                inner_html += `<td><pre>${data}</pre></td>`
+                inner_html += `</tr>`
+            }
+            inner_html += "</table>"
+            return inner_html;
         }
 
         async function populateGuestData(refresh=false) {
@@ -354,6 +371,11 @@
             }
             inner_html += "</table>"
             document.getElementById("guest-info").innerHTML = inner_html;
+
+            log_data = sessionStorage.getItem("logs")
+            if (log_data != null) {
+                document.getElementById('logs').innerHTML = make_log_table(JSON.parse(log_data));
+            }
         }
         populateGuestData();
 

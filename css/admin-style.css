@@ -43,3 +43,18 @@
 .bg-secondary-20 {
     background-color: rgb(223, 238, 250);
 }
+
+#addNewGuest {
+    background-color: blanchedalmond;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    margin: auto;
+    text-align: left;
+}
+
+@media (max-width: 900px) {
+    #addNewGuest {
+        width: 80%;
+    }
+}
