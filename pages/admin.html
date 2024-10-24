@@ -47,17 +47,20 @@
             document.getElementById("admin-login-div").style.display = "none";
             document.getElementById("admin-panel-div").style.display = "block";
             sessionStorage.setItem("admin_success", JSON.stringify(admin_success));
+            populateGuestData(true);
             return true;
         }
 
-        async function fetch_guest_data() {
+        async function fetch_guest_data(refresh=false) {
             if (sessionStorage.getItem("admin_success")) {
-                if (sessionStorage.getItem("all_guest_data")) {
+                if (!refresh && sessionStorage.getItem("all_guest_data")) {
                     return JSON.parse(sessionStorage.getItem("all_guest_data"));
                 }
                 guest_data = await get_post_response("https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/", {"task":"admin"})
+                logs = guest_data['logs']
                 guest_data = guest_data['data']
                 sessionStorage.setItem("all_guest_data", JSON.stringify(guest_data));
+                sessionStorage.setItem("logs", JSON.stringify(logs));
                 return guest_data;
             }
         }
@@ -92,7 +95,7 @@
             <div id="admin-panel-div" style="display:none; margin: auto; text-align: center;">
                 <h1>Admin panel</h1>
                 <a href="../index.html">Go to main page</a>
-                <!-- <div id="addNewGuest" style="background-color: blanchedalmond; padding: 20px; border-radius: 10px; width: 30%; margin: auto; text-align: left;">
+                <div id="addNewGuest" style="background-color: blanchedalmond; padding: 20px; border-radius: 10px; width: 30%; margin: auto; text-align: left;">
                     <h6>Add a new guest</h6>
                     <table>
                         <tr><th></th><th></th></tr>
@@ -105,13 +108,15 @@
                             <td><input type="text" id="add_email"/> </td>
                         </tr>
                     </table>
-                    <b>Events:</b> </br>
+                    <b>Invited events:</b> </br>
                     <input type="checkbox" id="add_haldi" style="margin-left: 30px;"> Haldi
                     <input type="checkbox" id="add_sangeet" style="margin-left: 30px;"> Sangeet
                     <input type="checkbox" id="add_shaadi" style="margin-left: 30px;"> Shaadi
                     </br>
-                    <button class="btn-primary" style="margin-left: 40%;" onclick="addNewGuest()">Save</button>
-                </div> -->
+                    <button class="btn-primary" style="margin-left: 40%;" onclick="addNewGuest()">Save <div class="load rotating" id="add_guest_spinning" style="display:none"></div></button>
+                    <div id="add_guest_failure" style="display:none"><i class="fa fa-warning" style="color: rgb(255, 100, 100)"></i> <span id="add_guest_failure_text">Failed to add new guest, please try again</span></div>
+                    <div id="add_guest_success" style="display:none"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> <span id="add_guest_success_text">Success! New guest info saved.</span></div>
+                </div>
                 <div id="guest-info"></div>
 
             </div>
@@ -136,36 +141,83 @@
         if (JSON.parse(sessionStorage.getItem("admin_success"))) {
             document.getElementById("admin-login-div").style.display = "none";
             document.getElementById("admin-panel-div").style.display = "block";
-            fetch_guest_data()
+            populateGuestData()
         }
 
         async function addNewGuest() {
+            document.getElementById("add_guest_spinning").style.display = "block";
+            document.getElementById("add_guest_success").style.display = "none";
+            document.getElementById("add_guest_failure").style.display = "none";
+            document.getElementById("add_guest_failure_text").innerHTML = "Failed to add new guest, please try again";
             name = document.getElementById("add_name").value
             email = document.getElementById("add_email").value
-            haldi = document.getElementById("add_haldi").value
-            sangeet = document.getElementById("add_sangeet").value
-            shaadi = document.getElementById("add_shaadi").value
+            haldi = document.getElementById("add_haldi").checked
+            sangeet = document.getElementById("add_sangeet").checked
+            shaadi = document.getElementById("add_shaadi").checked
 
             // Check if already exists, then don't add
+            let to_add = true
             guest_data = await fetch_guest_data()
-            guest_data.forEach(element => {
-                keys = Object.keys(element)
-                console.log(element['Name'], name)
-                console.log(element['Name']==name) // This is not working
-                if (element['Name'] == name) {
+            for (let idx=0; idx<guest_data.length; idx++) {
+                let element = guest_data[idx]
+                if (element['Name'].replaceAll("\"", "").toLowerCase().trim() == name.toLowerCase().trim()) {
                     console.log("Duplicate entry, skipping")
                     console.log(name)
-                    return
+                    to_add = false;
+                    document.getElementById("add_guest_success").style.display = "none";
+                    document.getElementById("add_guest_failure").style.display = "block";
+                    document.getElementById("add_guest_spinning").style.display = "none";
+                    document.getElementById("add_guest_failure_text").innerHTML = "Duplicate entry. Name already exists";
+                    return;
                 }
-            });
+            }
+
+            invited_events = []
+            if (haldi) {
+                invited_events.push(1)
+            }
+            if (sangeet) {
+                invited_events.push(2);
+            }
+            if (shaadi) {
+                invited_events.push(3);
+            }
+
+            console.log(invited_events.length)
+            if (invited_events.length == 0) {
+                document.getElementById("add_guest_success").style.display = "none";
+                document.getElementById("add_guest_failure").style.display = "block";
+                document.getElementById("add_guest_spinning").style.display = "none";
+                document.getElementById("add_guest_failure_text").innerHTML = "Invite for at least 1 event!";
+                return;
+            }
 
             console.log("New entry")
-
-
+            payload = {
+                "name": name,
+                "email": email,
+                "invited_events": invited_events,
+                "task": "add_new_guest"
+            }
+            add_guest_response = await get_post_response("https://pbjmk5efisqeutf77vtqvboho40ddmul.lambda-url.us-east-2.on.aws/", payload);
+            success = false;
+            if (add_guest_response['status'] == 'success') {
+                success = true;
+                // Show success
+                document.getElementById("add_guest_success").style.display = "block";
+                document.getElementById("add_guest_failure").style.display = "none";
+            }
+            if (!success) {
+                // Show failure
+                document.getElementById("add_guest_success").style.display = "none";
+                document.getElementById("add_guest_failure").style.display = "block";
+            }
+            document.getElementById("add_guest_spinning").style.display = "none";
+            populateGuestData(true);
         }
 
-        async function populateGuestData() {
-            guest_data = await fetch_guest_data()
+        async function populateGuestData(refresh=false) {
+            guest_data = await fetch_guest_data(refresh)
             // Add the guest data to the admin panel for viewing
             headers = ["Name", "Group", "Haldi", "Sangeet", "Shaadi", "Travel"]
             let inner_html = '<table id="admin-table"><tr>'
