@@ -64,6 +64,11 @@
                 return guest_data;
             }
         }
+
+        async function adminLogout(){
+            sessionStorage.removeItem('admin_success');
+            location.reload();
+        }
     </script>
 </head>
 
@@ -95,28 +100,31 @@
             <div id="admin-panel-div" style="display:none; margin: auto; text-align: center;">
                 <h1>Admin panel</h1>
                 <a href="../index.html">Go to main page</a>
-                <div id="addNewGuest">
-                    <h6>Add a new guest</h6>
-                    <table>
-                        <tr><th></th><th></th></tr>
-                        <tr>
-                            <td>Name:</td>
-                            <td><input type="text" id="add_name"/> </td>
-                        </tr>
-                        <tr>
-                            <td>Email (optional):</td>
-                            <td><input type="text" id="add_email"/> </td>
-                        </tr>
-                    </table>
-                    <b>Invited events:</b> </br>
-                    <input type="checkbox" id="add_haldi" style="margin-left: 30px;"> Haldi
-                    <input type="checkbox" id="add_sangeet" style="margin-left: 30px;"> Sangeet
-                    <input type="checkbox" id="add_shaadi" style="margin-left: 30px;"> Shaadi
+                <button style="margin-left: 40%;" onclick="adminLogout()">Logout of admin panel</button>
+                <div>
+                    <div id="addNewGuest">
+                        <h6>Add a new guest</h6>
+                        <table>
+                            <tr><th></th><th></th></tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td><input type="text" id="add_name"/> </td>
+                            </tr>
+                            <tr>
+                                <td>Email (optional):</td>
+                                <td><input type="text" id="add_email"/> </td>
+                            </tr>
+                        </table>
+                        <b>Invited events:</b> </br>
+                        <input type="checkbox" id="add_haldi" style="margin-left: 30px;"> Haldi
+                        <input type="checkbox" id="add_sangeet" style="margin-left: 30px;"> Sangeet
+                        <input type="checkbox" id="add_shaadi" style="margin-left: 30px;"> Shaadi
                     </br>
                     <button class="btn-primary" style="margin-left: 40%;" onclick="addNewGuest()">Save <div class="load rotating" id="add_guest_spinning" style="display:none"></div></button>
                     <div id="add_guest_failure" style="display:none"><i class="fa fa-warning" style="color: rgb(255, 100, 100)"></i> <span id="add_guest_failure_text">Failed to add new guest, please try again</span></div>
                     <div id="add_guest_success" style="display:none"><i class="fa fa-check-circle" style="color:rgb(17, 148, 12)"></i> <span id="add_guest_success_text">Success! New guest info saved.</span></div>
                 </div>
+                <button style="margin-top: 20px;" onclick="populateGuestData(true)">Refresh</button>
                 <div id="guest-info"></div>
                 <h4>Activity Log</h4>
                 <div id="logs"></div>
