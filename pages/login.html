@@ -67,6 +67,10 @@
             inner_html = ''
             for (let i=0; i<family_members.length; i+=1) {
                 name = family_members[i];
+                name = name.toLowerCase()
+                            .split(' ')
+                            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                            .join(' ');
                 inner_html += `<input type="checkbox" id="${name}" name="checkbox_member_1" value="${name}" style="margin: 10px" checked> ${name}</input><br/>`;
             }
             console.log(inner_html);
